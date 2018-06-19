@@ -1,0 +1,63 @@
+
+.hidden {
+    display: none;
+}
+
+#calc-container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 0 15px;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+#calc-bond-input {
+    background: #f6f3fd;
+}
+
+.calc-section {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.calc-section h3 {
+    width: 100%;
+    color: #4a4949;
+}
+
+.calc-label {
+    box-sizing: border-box;
+    width: 50%;
+    padding: 8px 5px 8px 20px;
+    border: 1px solid #e8e8e8;
+    border-bottom: none;
+    color: #5a5a5a;
+}
+
+.calc-input {
+    box-sizing: border-box;
+    width: 50%;
+    padding: 8px 5px 8px 20px;
+    font-family: Arial;
+    border: 1px solid #e8e8e8;
+    border-bottom: none;
+    border-left: none;
+    color: #4a4a4a;
+    font-size: 16px;
+}
+
+.calc-input::before {
+    content: 'R ';
+}
+
+.calc-quote {
+    font-size: 15px;
+    padding: 15px;
+}
+
+.total-label,
+.transfer-fees-total,
+.bond-fees-total {
+    font-weight: bold;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bond Calculator</title>
+    
+    
+    <link rel="stylesheet" href="calc.css">
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <!-- BOND CALCULATOR START -->
+    <!-- COPY BELOW HTML -->
+
+    <div id="calc-container" class="hidden">
+        <div class="calc-section">
+            <h3>Required Information</h3>
+
+            <label class="calc-label">Bond Amount</label>
+            <input id="calc-bond-input" class="calc-input" type="number" maxlength="9" value="1000000" step="100000">
+        </div>
+
+        <div class="calc-section">
+            <h3>Transfer Costs</h3>
+
+            <label class="calc-label">Deeds Office Fee</label>
+            <div class="calc-input deeds-transfer-fee">0</div>
+
+            <label class="calc-label">Transfer Duty</label>
+            <div class="calc-input transfer-duty">0</div>
+
+            <label class="calc-label">Conveyancing Tariff Fee</label>
+            <div class="calc-input conveyancing-tariff">0</div>
+
+            <label class="calc-label">VAT</label>
+            <div class="calc-input vat">0</div>
+
+            <label class="calc-label total-label">Total</label>
+            <div class="calc-input transfer-fees-total">0</div>
+        </div>
+
+        <div class="calc-section">
+            <h3>Bond Costs</h3>
+
+            <label class="calc-label">Deeds Office Fee</label>
+            <div class="calc-input deeds-bond-fee">0</div>
+
+            <label class="calc-label">Conveyancing Tariff Fee</label>
+            <div class="calc-input conveyancing-tariff">0</div>
+
+            <label class="calc-label">VAT</label>
+            <div class="calc-input vat">0</div>
+
+            <label class="calc-label total-label">Total</label>
+            <div class="calc-input bond-fees-total">0</div>
+        </div>
+        
+        <p class="calc-quote">The costs quoted herein are the major costs involved in the registration process but there will be additional costs that will be involved in the process. For a detailed quote please contact our offices</p>
+
+    </div>
+
+    
+    <!-- BOND CALCULATOR END -->
+
+    <script src="calc.js"></script>
+</body>
+</html>

@@ -77,8 +77,6 @@ function updateValues(pp) {
     var conveyancyFee = getConveyancyFee(pp);
     var vat = getVat(conveyancyFee);
 
-    console.log(deedsTransferFee, deedsBondFee, transferDuty, conveyancyFee)
-
     $(".deeds-transfer-fee").html(formatCurrency(deedsTransferFee));
     $(".deeds-bond-fee").html(formatCurrency(deedsBondFee));
     $(".transfer-duty").html(formatCurrency(transferDuty));
@@ -106,7 +104,6 @@ function getTransferDuty(pp) {
     for(var i=0; i < FEES.TRANSFER_DUTIES.length; i++) {
         var tier = FEES.TRANSFER_DUTIES[i];
         if(Number(pp) >= tier.FROM && Number(pp) <= tier.TO) {
-            console.log(tier.AMOUNT, tier.PERC, Number(pp), tier.FROM)
             return Math.ceil(tier.AMOUNT + (tier.PERC * (Number(pp) - tier.FROM)));
             break;
         }

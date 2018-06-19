@@ -88,16 +88,7 @@ function updateValues(pp) {
 }
 
 function formatCurrency(number) {
-    var numstring = number.toString();
-
-    if(numstring.length > 3){
-        var thpos = -3;
-        var strgnum = numstring.slice(0, numstring.length+thpos);
-        var strgspace = (" " + numstring.slice(thpos));
-        numstring = strgnum + strgspace;
-    }
-
-    return numstring;
+    return number.toLocaleString('en-ZA');
 }
 
 function getTransferDuty(pp) {

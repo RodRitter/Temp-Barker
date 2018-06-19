@@ -105,9 +105,9 @@ function formatCurrency(number) {
 function getTransferDuty(pp) {
     for(var i=0; i < FEES.TRANSFER_DUTIES.length; i++) {
         var tier = FEES.TRANSFER_DUTIES[i];
-        if(pp >= tier.FROM && pp <= tier.TO) {
+        if(Number(pp) >= tier.FROM && Number(pp) <= tier.TO) {
             console.log(tier.AMOUNT, tier.PERC, Number(pp), tier.FROM)
-            return Math.ceil(tier.AMOUNT + (tier.PERC * (pp - tier.FROM)));
+            return Math.ceil(tier.AMOUNT + (tier.PERC * (Number(pp) - tier.FROM)));
             break;
         }
     }
@@ -116,7 +116,7 @@ function getTransferDuty(pp) {
 function getDeedsFeeTransfer(pp) {
     for(var i=0; i < FEES.DEEDS_OFFICE_TRANSFER.length; i++) {
         var tier = FEES.DEEDS_OFFICE_TRANSFER[i];
-        if(pp >= tier.FROM && pp <= tier.TO) {
+        if(Number(pp) >= tier.FROM && Number(pp) <= tier.TO) {
             return tier.AMOUNT;
             break;
         }
@@ -126,7 +126,7 @@ function getDeedsFeeTransfer(pp) {
 function getDeedsFeeBond(pp) {
     for(var i=0; i < FEES.DEEDS_OFFICE_BOND.length; i++) {
         var tier = FEES.DEEDS_OFFICE_BOND[i];
-        if(pp >= tier.FROM && pp <= tier.TO) {
+        if(Number(pp) >= tier.FROM && Number(pp) <= tier.TO) {
             return tier.AMOUNT;
             break;
         }
@@ -136,11 +136,11 @@ function getDeedsFeeBond(pp) {
 function getConveyancyFee(pp) {
     for(var i=0; i < FEES.CONVEYANCING.length; i++) {
         var tier = FEES.CONVEYANCING[i];
-        if(pp >= tier.FROM && pp <= tier.TO) {
+        if(Number(pp) >= tier.FROM && Number(pp) <= tier.TO) {
             var fee = FEES.CONVEYANCING[0].AMOUNT;
 
             if(tier.AMT_PER > 0) {
-                var diff = pp - tier.FROM;
+                var diff = Number(pp) - tier.FROM;
                 fee = tier.AMOUNT + ((diff / tier.PER_RANGE) * tier.AMT_PER);
             }
             

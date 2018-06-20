@@ -10,7 +10,7 @@
     font-family: "Trebuchet MS", sans-serif;
 }
 
-#calc-bond-input {
+.calc-blue-input {
     background: #f6f3fd;
 }
 
@@ -51,6 +51,18 @@
     content: 'R ';
 }
 
+.calc-input-years::before {
+    content: '';
+}
+
+.calc-input-years::after {
+    content: ' yrs';
+}
+
+.monthly-total::after {
+    content: ' p.m';
+}
+
 .calc-quote {
     font-size: 15px;
     padding: 15px;
@@ -58,6 +70,8 @@
 
 .total-label,
 .transfer-fees-total,
-.bond-fees-total {
+.bond-fees-total,
+.instalment-total-bond,
+.monthly-total {
     font-weight: bold;
 }

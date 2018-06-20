@@ -56,35 +56,108 @@ const FEES = {
 
 
 $(document).ready(function() {
-    updateValues($("#calc-bond-input").val());
+    var pp = $("#calc-bond-input").val();
+    updateTransferValues($("#calc-pp-input").val());
+    updateBondValues(pp);
+    updatePayments(pp);
     
+    $("#calc-pp-input").keyup(function(e) {
+        updateTransferValues($(this).val());
+    });
+
+    $("#calc-pp-input").change(function(e) {
+        updateTransferValues($(this).val());
+    });
+
     $("#calc-bond-input").keyup(function(e) {
-        updateValues($(this).val());
+        var pp = $(this).val();
+        updateBondValues(pp);
+        updatePayments(pp);
     });
 
     $("#calc-bond-input").change(function(e) {
-        updateValues($(this).val());
+        var pp = $(this).val();
+        updateBondValues(pp);
+        updatePayments(pp);
+    });
+
+    $("#calc-interest-input").keyup(function(e) {
+        var pp = $("#calc-bond-input").val();
+        updatePayments(pp);
+    });
+
+    $("#calc-interest-input").change(function(e) {
+        var pp = $("#calc-bond-input").val();
+        updatePayments(pp);
+    });
+
+    $("#calc-years-input").keyup(function(e) {
+        var pp = $("#calc-bond-input").val();
+        updatePayments(pp);
+    });
+
+    $("#calc-years-input").change(function(e) {
+        var pp = $("#calc-bond-input").val();
+        updatePayments(pp);
     });
 
     $("#calc-container").removeClass("hidden");
-
 });
 
-function updateValues(pp) {
-    var deedsTransferFee = getDeedsFeeTransfer(pp);
-    var deedsBondFee = getDeedsFeeBond(pp);
-    var transferDuty = getTransferDuty(pp);
-    var conveyancyFee = getConveyancyFee(pp);
-    var vat = getVat(conveyancyFee);
+function updateTransferValues(pp) {
+    if(pp > 0) {
+        var deedsTransferFee = getDeedsFeeTransfer(pp);
+        var deedsBondFee = getDeedsFeeBond(pp);
+        var transferDuty = getTransferDuty(pp);
+        var conveyancyFee = getConveyancyFee(pp);
+        var vat = getVat(conveyancyFee);
+    
+        $(".deeds-transfer-fee").html(formatCurrency(deedsTransferFee));
+        $(".transfer-duty").html(formatCurrency(transferDuty));
+        $(".conveyancing-tariff").html(formatCurrency(conveyancyFee));
+        $(".vat").html(formatCurrency(vat));
+    
+        $(".transfer-fees-total").html(formatCurrency(deedsTransferFee + transferDuty + conveyancyFee + vat));
+    } else {
+        $(".transfer-fees-total").html(0);
+    }
+}
 
-    $(".deeds-transfer-fee").html(formatCurrency(deedsTransferFee));
-    $(".deeds-bond-fee").html(formatCurrency(deedsBondFee));
-    $(".transfer-duty").html(formatCurrency(transferDuty));
-    $(".conveyancing-tariff").html(formatCurrency(conveyancyFee));
-    $(".vat").html(formatCurrency(vat));
+function updateBondValues(pp) {
+    if(pp > 0) {
+        var deedsBondFee = getDeedsFeeBond(pp);
+        var conveyancyFee = getConveyancyFee(pp);
+        var vat = getVat(conveyancyFee);
+    
+        $(".deeds-bond-fee").html(formatCurrency(deedsBondFee));
+        $(".conveyancing-tariff-bond").html(formatCurrency(conveyancyFee));
+        $(".vat-bond").html(formatCurrency(vat));
+    
+        $(".bond-fees-total").html(formatCurrency(deedsBondFee + conveyancyFee + vat));
+    } else {
+        $(".bond-fees-total").html(0);
+    }
+}
 
-    $(".transfer-fees-total").html(formatCurrency(deedsTransferFee + transferDuty + conveyancyFee + vat));
-    $(".bond-fees-total").html(formatCurrency(deedsTransferFee + conveyancyFee + vat));
+function updatePayments(pp) {
+
+    if(pp > 0) {
+        var rate = Number( $("#calc-interest-input").val() ) / 100;
+        var years = Number( $("#calc-years-input").val() );
+
+        var monthly = calculatePayment(rate, years, Number(pp));
+
+        if(monthly) {
+            $(".monthly-total").html(formatCurrency(monthly));
+
+            var interest = monthly * (years * 12);
+            $(".instalment-total-bond").html(formatCurrency( interest ));
+        }
+    } else {
+        $(".monthly-total").html(0);
+        $(".instalment-total-bond").html(0);
+    }
+    
 }
 
 function formatCurrency(number) {
@@ -155,3 +228,11 @@ function getTotalBondFees(pp) {
     return deeds + convey;
 }
 
+function calculatePayment(rate,years,principle) {
+    var pvif, pmt;
+
+    pvif = Math.pow( 1 + (rate/12), years*12);
+    pmt = (rate/12) / (pvif - 1) * principle * pvif;
+
+    return Math.ceil(pmt);
+};

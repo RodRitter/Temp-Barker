@@ -22,8 +22,10 @@
         <div class="calc-section">
             <h3>Required Information</h3>
 
+            <label class="calc-label">Purchase Price</label>
+            <input id="calc-pp-input" class="calc-input calc-blue-input" type="number" maxlength="9" value="0" step="100000">
             <label class="calc-label">Bond Amount</label>
-            <input id="calc-bond-input" class="calc-input" type="number" maxlength="9" value="1000000" step="100000">
+            <input id="calc-bond-input" class="calc-input calc-blue-input" type="number" maxlength="9" value="1000000" step="100000">
         </div>
 
         <div class="calc-section">
@@ -52,13 +54,29 @@
             <div class="calc-input deeds-bond-fee">0</div>
 
             <label class="calc-label">Conveyancing Tariff Fee</label>
-            <div class="calc-input conveyancing-tariff">0</div>
+            <div class="calc-input conveyancing-tariff-bond">0</div>
 
             <label class="calc-label">VAT</label>
-            <div class="calc-input vat">0</div>
+            <div class="calc-input vat-bond">0</div>
 
             <label class="calc-label total-label">Total</label>
             <div class="calc-input bond-fees-total">0</div>
+        </div>
+
+        <div class="calc-section">
+            <h3>Monthly Instalment</h3>
+
+            <label class="calc-label">Interest Rate</label>
+            <input id="calc-interest-input" class="calc-input calc-blue-input" type="number" maxlength="2" value="10" step="0.5">
+
+            <label class="calc-label">Repayment Period <small>(years)</small></label>
+            <input id="calc-years-input" class="calc-input calc-blue-input" type="number" maxlength="2" value="20" step="1">
+
+            <label class="calc-label total-label">Total Bond</label>
+            <div class="calc-input instalment-total-bond">0</div>
+
+            <label class="calc-label total-label">Instalment</label>
+            <div class="calc-input monthly-total">0</div>
         </div>
         
         <p class="calc-quote">The costs quoted herein are the major costs involved in the registration process but there will be additional costs that will be involved in the process. For a detailed quote please contact our offices</p>

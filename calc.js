@@ -51,50 +51,82 @@ const FEES = {
     ]
 }
 
-
-
 $(document).ready(function() {
-    var pp = $("#calc-bond-input").val();
-    updateTransferValues($("#calc-pp-input").val());
-    updateBondValues(pp);
-    updatePayments(pp);
+    var bondVal = $("#calc-bond-input").val();
+    var bondParsed = decodeCurrency(bondVal);
+    var bondFormatted = formatInputCurrency(bondVal);
+
+    var ppVal = $("#calc-pp-input").val();
+    var ppParsed = decodeCurrency(ppVal);
+    var ppFormatted = formatInputCurrency(ppVal);
+
+    var rateString = decodePercentInput($("#calc-interest-input").val());
+    var rateFormatted = formatPercentInput(rateString);
+
+    $("#calc-interest-input").val(rateFormatted);
     
-    $("#calc-pp-input").keyup(function(e) {
-        updateTransferValues($(this).val());
+    updateTransferValues(ppParsed);
+    $("#calc-pp-input").val(ppFormatted);
+
+    updateBondValues(bondParsed);
+    updatePayments(bondParsed);
+    $("#calc-bond-input").val(bondFormatted);
+    
+    $("#calc-pp-input").on('keypress keyup change' , function(e) {
+        var inputVal = $(this).val();
+        var parsedVal = decodeCurrency(inputVal);
+        var formattedVal = formatInputCurrency(parsedVal);
+
+        // console.log(inputVal, parsedVal, formattedVal);
+        
+        if(e.which < 48 || e.which > 57) {
+            e.preventDefault();
+        }
+        
+        updateTransferValues(parsedVal);
+        $("#calc-pp-input").val(formattedVal);
     });
 
-    $("#calc-pp-input").change(function(e) {
-        updateTransferValues($(this).val());
+    $("#calc-bond-input").on('keypress keyup change', function(e) {
+        var inputVal = $(this).val();
+        var parsedVal = decodeCurrency(inputVal);
+        var formattedVal = formatInputCurrency(parsedVal);
+
+        if(e.which < 48 || e.which > 57) {
+            e.preventDefault();
+        }
+
+        updateBondValues(parsedVal);
+        updatePayments(parsedVal);
+        $("#calc-bond-input").val(formattedVal);
     });
 
-    $("#calc-bond-input").keyup(function(e) {
-        var pp = $(this).val();
-        updateBondValues(pp);
-        updatePayments(pp);
+    $("#calc-interest-input").on('keypress keyup change', function(e) {
+        var inputVal = $("#calc-bond-input").val();
+        var parsedVal = decodeCurrency(inputVal);
+
+        var percentString = decodePercentInput($("#calc-interest-input").val());
+        var formattedVal = formatPercentInput(percentString);
+
+        if(e.which < 48 || e.which > 57) {
+            e.preventDefault();
+        }
+
+        updatePayments(parsedVal);
+        $("#calc-interest-input").val(formattedVal);
     });
 
-    $("#calc-bond-input").change(function(e) {
-        var pp = $(this).val();
-        updateBondValues(pp);
-        updatePayments(pp);
+    $("#calc-interest-input").on('focus', function(e) {
+        
+        var beforePerc = $(this).val().length-1;
+
+        window.setTimeout(function() {
+            setCaretPosition(e.target, 0, beforePerc);
+        }, 50);
+        
     });
 
-    $("#calc-interest-input").keyup(function(e) {
-        var pp = $("#calc-bond-input").val();
-        updatePayments(pp);
-    });
-
-    $("#calc-interest-input").change(function(e) {
-        var pp = $("#calc-bond-input").val();
-        updatePayments(pp);
-    });
-
-    $("#calc-years-input").keyup(function(e) {
-        var pp = $("#calc-bond-input").val();
-        updatePayments(pp);
-    });
-
-    $("#calc-years-input").change(function(e) {
+    $("#calc-years-input").on('keypress change', function(e) {
         var pp = $("#calc-bond-input").val();
         updatePayments(pp);
     });
@@ -140,7 +172,8 @@ function updateBondValues(pp) {
 function updatePayments(pp) {
 
     if(pp > 0) {
-        var rate = Number( $("#calc-interest-input").val() ) / 100;
+        var perc = decodePercentInput($("#calc-interest-input").val());
+        var rate = perc / 100;
         var years = Number( $("#calc-years-input").val() );
 
         var monthly = calculatePayment(rate, years, Number(pp));
@@ -160,6 +193,30 @@ function updatePayments(pp) {
 
 function formatCurrency(number) {
     return number.toLocaleString('en-ZA');
+}
+
+function formatInputCurrency(value) {
+    return "R " + formatCurrency(value);
+}
+
+function decodeCurrency(currencyString) {
+    var result = currencyString.replace(/[R]/, "");
+    result = result.replace(/\s/gi, "");
+    return Number(result);
+}
+
+function formatPercentInput(percent) {
+    var raw = decodePercentInput(String(percent));
+    return raw+"%";
+}
+
+function decodePercentInput(percentString) {
+    var result = percentString.replace(/\%/g, "");
+    return Number(result);
+}
+
+function setCaretPosition(input, start, end) {
+    input.setSelectionRange(start,end);
 }
 
 function getTransferDuty(pp) {

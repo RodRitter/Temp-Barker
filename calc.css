@@ -145,6 +145,10 @@
         top: 0;
     }
 
+    .reset-calc {
+        display: none;
+    }
+
     .calc-actions {
         display: none;
     }

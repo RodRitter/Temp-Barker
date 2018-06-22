@@ -153,6 +153,10 @@ function updateTransferValues(pp) {
     
         $(".transfer-fees-total").html(formatCurrency(deedsTransferFee + transferDuty + conveyancyFee + vat));
     } else {
+        $(".deeds-transfer-fee").html(formatCurrency(0));
+        $(".transfer-duty").html(formatCurrency(0));
+        $(".conveyancing-tariff").html(formatCurrency(0));
+        $(".vat").html(formatCurrency(0));
         $(".transfer-fees-total").html(0);
     }
 }
@@ -169,6 +173,9 @@ function updateBondValues(pp) {
     
         $(".bond-fees-total").html(formatCurrency(deedsBondFee + conveyancyFee + vat));
     } else {
+        $(".deeds-bond-fee").html(formatCurrency(0));
+        $(".conveyancing-tariff-bond").html(formatCurrency(0));
+        $(".vat-bond").html(formatCurrency(0));
         $(".bond-fees-total").html(0);
     }
 }

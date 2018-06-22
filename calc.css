@@ -116,5 +116,20 @@
 }
 
 @media print {
-    
+    body * {
+        visibility: hidden;
+    }
+    #calc-container, #calc-container * {
+        visibility: visible;
+    }
+
+    #calc-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .calc-actions {
+        display: none;
+    }
 }

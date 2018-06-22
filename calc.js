@@ -126,13 +126,21 @@ $(document).ready(function() {
         
     });
 
-    $("#calc-years-input").on('keypress change', function(e) {
-        var pp = $("#calc-bond-input").val();
-        updatePayments(pp);
+    $("#calc-years-input").on('keypress keyup change', function(e) {
+        var inputVal = $("#calc-bond-input").val();
+        var parsedVal = decodeCurrency(inputVal);
+        updatePayments(parsedVal);
     });
 
     $('.calc-print').on('click', function() {
         window.print();
+    });
+
+    $('.reset-calc').on('click', function() {
+        $("#calc-pp-input").val(0).change();
+        $("#calc-bond-input").val(0).change();
+        $("#calc-interest-input").val(10).change();
+        $("#calc-years-input").val(20).change();
     });
 
     $("#calc-container").removeClass("hidden");

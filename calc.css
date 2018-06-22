@@ -19,6 +19,7 @@
     flex-wrap: wrap;
     margin: 10px 0;
     border-bottom: 1px solid #e8e8e8;
+    overflow: auto;
 }
 
 .calc-section h3 {
@@ -114,6 +115,21 @@
     width: 30%;
     margin: 0 10%;
 }
+
+.reset-calc {
+    display: block;
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    padding: 5px 20px;
+    font-size: 16px;
+    transition: all linear 0.1s;
+}
+
+.reset-calc:hover {
+    background: #f6f3fd;
+    transition: all linear 0.1s;
+}
+
 
 @media print {
     body * {

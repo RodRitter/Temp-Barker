@@ -75,3 +75,46 @@
 .monthly-total {
     font-weight: bold;
 }
+
+.calc-actions {
+    display: flex;
+    margin-bottom: 100px;
+}
+
+.calc-button {
+    border: 1px solid gray;
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 16px;
+    transition: all linear 0.1s;
+}
+
+.calc-button:hover {
+    background: #f6f3fd;
+    font-size: 14px;
+    transition: all linear 0.1s;
+}
+
+.calc-email-input {
+    box-sizing: border-box;
+    width: 29%;
+    margin: 0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.calc-email {
+    box-sizing: border-box;
+    width: 18%;
+    margin: 0 2%;
+}
+
+.calc-print {
+    box-sizing: border-box;
+    width: 30%;
+    margin: 0 10%;
+}
+
+@media print {
+    
+}

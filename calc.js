@@ -131,6 +131,10 @@ $(document).ready(function() {
         updatePayments(pp);
     });
 
+    $('.calc-print').on('click', function() {
+        window.print();
+    });
+
     $("#calc-container").removeClass("hidden");
 });
 

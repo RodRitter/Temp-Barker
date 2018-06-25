@@ -130,6 +130,12 @@
     transition: all linear 0.1s;
 }
 
+#calc-logo {
+    margin: 0 auto;
+    display: block;
+    display: none;
+}
+
 
 @media print {
     body * {
@@ -151,5 +157,9 @@
 
     .calc-actions {
         display: none;
+    }
+
+    #calc-logo {
+        display: block;
     }
 }

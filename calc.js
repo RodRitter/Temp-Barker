@@ -76,7 +76,7 @@ $(document).ready(function() {
         var parsedVal = decodeCurrency(inputVal);
         var formattedVal = formatInputCurrency(parsedVal);
 
-        alert(inputVal, parsedVal, formattedVal);
+        // console.log(inputVal, parsedVal, formattedVal);
         
         if(e.which < 48 || e.which > 57) {
             e.preventDefault();

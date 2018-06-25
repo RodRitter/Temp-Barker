@@ -135,7 +135,7 @@
     float: right;
     overflow: auto;
     display: block;
-    margin: 20px 0;
+    margin: 0;
     display: none;
 }
 
@@ -164,5 +164,6 @@
 
     #calc-logo {
         display: block;
+        margin: 20px 0;
     }
 }

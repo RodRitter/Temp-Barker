@@ -19,6 +19,7 @@
     margin: 10px 0;
     border-bottom: 1px solid #e8e8e8;
     overflow: auto;
+    width: 100%;
 }
 
 .calc-section h3 {
@@ -131,8 +132,10 @@
 }
 
 #calc-logo {
-    margin: 0 auto;
+    float: right;
+    overflow: auto;
     display: block;
+    margin: 20px 0;
     display: none;
 }
 

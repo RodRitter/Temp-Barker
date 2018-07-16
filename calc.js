@@ -275,7 +275,7 @@ function getConveyancyFee(pp) {
 
             if(tier.AMT_PER > 0) {
                 var diff = Number(pp) - tier.FROM;
-                fee = tier.AMOUNT + ((diff / tier.PER_RANGE) * tier.AMT_PER);
+                fee = tier.AMOUNT + ((Math.floor(diff / tier.PER_RANGE)+1) * tier.AMT_PER);
             }
             
             return Math.ceil(fee);

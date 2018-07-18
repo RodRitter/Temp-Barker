@@ -51,13 +51,11 @@ const FEES = {
 }
 
 $(document).ready(function() {
-    var bondVal = $("#calc-bond-input").val();
-    var bondParsed = decodeCurrency(bondVal);
-    var bondFormatted = formatInputCurrency(bondVal);
+    var bondParsed = decodeCurrency('0');
+    var bondFormatted = formatInputCurrency('0');
 
-    var ppVal = $("#calc-pp-input").val();
-    var ppParsed = decodeCurrency(ppVal);
-    var ppFormatted = formatInputCurrency(ppVal);
+    var ppParsed = decodeCurrency('0');
+    var ppFormatted = formatInputCurrency('0');
 
     var rateString = decodePercentInput($("#calc-interest-input").val());
     var rateFormatted = formatPercentInput(rateString);
